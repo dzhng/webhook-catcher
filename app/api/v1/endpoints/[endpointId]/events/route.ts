@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { getConfig } from "@/lib/config";
 import { jsonError, parseLimit } from "@/lib/http";
 import { generateConsumerGroupId } from "@/lib/ids";
 import { getQueueClient, getTopicName } from "@/lib/queue";
@@ -20,7 +19,6 @@ export async function GET(
   context: EventsRouteContext,
 ): Promise<NextResponse> {
   try {
-    const config = getConfig();
     const { endpointId } = await context.params;
 
     if (!isValidEndpointId(endpointId)) {
@@ -37,11 +35,7 @@ export async function GET(
     const incomingCursor = url.searchParams.get("cursor");
 
     if (incomingCursor) {
-      const cursorPayload = verifyCursorToken(
-        incomingCursor,
-        endpointId,
-        config.signingSecret,
-      );
+      const cursorPayload = verifyCursorToken(incomingCursor, endpointId);
 
       if (!cursorPayload || !isValidConsumerGroup(cursorPayload.consumerGroup)) {
         return jsonError(400, "Invalid cursor");
@@ -72,8 +66,6 @@ export async function GET(
     const nextCursor = createCursorToken(
       endpointId,
       consumerGroup,
-      config.signingSecret,
-      config.cursorTokenTtlSeconds,
     );
 
     return NextResponse.json(

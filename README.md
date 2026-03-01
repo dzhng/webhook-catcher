@@ -40,7 +40,6 @@ When to use:
 
 Copy `.env.example` to `.env.local` and set:
 
-- `WEBHOOK_CATCHER_SIGNING_SECRET` — required
 - `WEBHOOK_CATCHER_QUEUE_REGION` — required on Vercel
 
 See `.env.example` for all optional settings.
