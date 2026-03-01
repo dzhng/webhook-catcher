@@ -76,7 +76,6 @@ curl -s -X POST 'https://your-app.vercel.app/api/ingest/ep_xxx/WRITE_SECRET' \
 
 Headers:
 - `Authorization: Bearer <readToken>`
-  - Optional: if `WEBHOOK_CATCHER_API_KEY` is set, that key also works.
 
 First page (no cursor):
 
