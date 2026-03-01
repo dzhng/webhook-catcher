@@ -1,13 +1,13 @@
-const EXAMPLE_CREATE = `curl -s -X POST http://localhost:3000/api/v1/endpoints`;
+const EXAMPLE_CREATE = `curl -s -X POST https://webhookcollector.dev/api/v1/endpoints`;
 
-const EXAMPLE_INGEST = `curl -s -X POST 'https://your-app.vercel.app/api/ingest/ep_xxx/WRITE_SECRET' \\
+const EXAMPLE_INGEST = `curl -s -X POST 'https://webhookcollector.dev/api/ingest/ep_xxx/WRITE_SECRET' \\
   -H 'Content-Type: application/json' \\
   -d '{"hello":"world"}'`;
 
-const EXAMPLE_READ_FIRST = `curl -s 'https://your-app.vercel.app/api/v1/endpoints/ep_xxx/events?limit=10' \\
+const EXAMPLE_READ_FIRST = `curl -s 'https://webhookcollector.dev/api/v1/endpoints/ep_xxx/events?limit=10' \\
   -H 'Authorization: Bearer READ_TOKEN'`;
 
-const EXAMPLE_READ_NEXT = `curl -s 'https://your-app.vercel.app/api/v1/endpoints/ep_xxx/events?limit=10&cursor=NEXT_CURSOR' \\
+const EXAMPLE_READ_NEXT = `curl -s 'https://webhookcollector.dev/api/v1/endpoints/ep_xxx/events?limit=10&cursor=NEXT_CURSOR' \\
   -H 'Authorization: Bearer READ_TOKEN'`;
 
 export default function Home() {
