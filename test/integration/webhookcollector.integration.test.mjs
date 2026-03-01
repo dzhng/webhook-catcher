@@ -73,7 +73,7 @@ async function createEndpoint() {
   assert.equal(ingestUrl.origin, BASE_ORIGIN);
   assert.equal(eventsUrl.origin, BASE_ORIGIN);
 
-  const ingestMatch = ingestUrl.pathname.match(/^\/api\/ingest\/([^/]+)\/([^/]+)$/);
+  const ingestMatch = ingestUrl.pathname.match(/^\/api\/ingest\/([^/]+)$/);
   assert.ok(ingestMatch, `Unexpected ingest URL path: ${ingestUrl.pathname}`);
 
   const eventsMatch = eventsUrl.pathname.match(
@@ -83,13 +83,11 @@ async function createEndpoint() {
 
   const endpointIdFromIngest = ingestMatch[1];
   const endpointIdFromEvents = eventsMatch[1];
-  const writeSecret = ingestMatch[2];
 
   assert.equal(endpointIdFromIngest, endpointIdFromEvents);
 
   return {
     endpointId: endpointIdFromEvents,
-    writeSecret,
     ingestUrl: ingestUrl.toString(),
     eventsUrl: eventsUrl.toString(),
   };
@@ -155,7 +153,6 @@ test(
     const endpoint = await createEndpoint();
 
     assert.match(endpoint.endpointId, /^ep_[A-Za-z0-9_-]+$/);
-    assert.match(endpoint.writeSecret, /^[A-Za-z0-9_-]+$/);
   },
 );
 
@@ -251,14 +248,10 @@ test(
 );
 
 test(
-  "ingest endpoint rejects incorrect write secret",
+  "ingest endpoint rejects invalid endpoint id",
   { timeout: 60_000 },
   async () => {
-    const endpoint = await createEndpoint();
-    const badSecret = endpoint.writeSecret.slice(0, -1) + (endpoint.writeSecret.endsWith("a") ? "b" : "a");
-
-    const badUrl = endpoint.ingestUrl.replace(endpoint.writeSecret, badSecret);
-    const response = await fetchJson(badUrl, {
+    const response = await fetchJson(`${BASE_ORIGIN}/api/ingest/not-valid`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

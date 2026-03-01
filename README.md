@@ -9,7 +9,7 @@ Built for Vercel with `@vercel/queue` and Next.js route handlers.
 ## How it works
 
 1. `POST /api/v1/endpoints` — creates a catch endpoint (no auth).
-2. Send webhooks to `/api/ingest/{endpointId}/{writeSecret}` — any HTTP method.
+2. Send webhooks to `/api/ingest/{endpointId}` — any HTTP method.
 3. Read captured events with `GET /api/v1/endpoints/{endpointId}/events` and cursor pagination.
 
 ## For AI agents
@@ -24,7 +24,7 @@ Description: Create temporary webhook endpoints to capture and inspect
 
 Capabilities:
   1. Create endpoint  — POST /api/v1/endpoints (no auth)
-  2. Ingest webhooks  — ANY /api/ingest/{id}/{writeSecret}
+  2. Ingest webhooks  — ANY /api/ingest/{id}
   3. Read events      — GET /api/v1/endpoints/{id}/events (no auth)
 
 When to use:
@@ -75,10 +75,10 @@ Returns `ingestUrl`, `eventsUrl`.
 
 ### Ingest webhook
 
-`ANY /api/ingest/{endpointId}/{writeSecret}`
+`ANY /api/ingest/{endpointId}`
 
 ```bash
-curl -s -X POST 'http://localhost:3000/api/ingest/ep_xxx/WRITE_SECRET' \
+curl -s -X POST 'http://localhost:3000/api/ingest/ep_xxx' \
   -H 'Content-Type: application/json' \
   -d '{"event":"order.created"}'
 ```

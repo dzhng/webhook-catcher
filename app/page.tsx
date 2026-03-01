@@ -2,7 +2,7 @@ const BASE_URL = "https://webhookcollector.dev";
 
 const EXAMPLE_CREATE = `curl -s -X POST ${BASE_URL}/api/v1/endpoints`;
 
-const EXAMPLE_INGEST = `curl -s -X POST '${BASE_URL}/api/ingest/ep_xxx/WRITE_SECRET' \\
+const EXAMPLE_INGEST = `curl -s -X POST '${BASE_URL}/api/ingest/ep_xxx' \\
   -H 'Content-Type: application/json' \\
   -d '{"event":"order.created","data":{"id":42}}'`;
 
@@ -21,7 +21,7 @@ Response (200):
       "endpointId": "ep_xxx",
       "receivedAt": "2026-03-01T00:00:00.000Z",
       "method": "POST",
-      "path": "/api/ingest/ep_xxx/[redacted]",
+      "path": "/api/ingest/ep_xxx",
       "query": { "foo": "bar" },
       "headers": { "content-type": "application/json" },
       "body": {
@@ -88,11 +88,11 @@ export default function Home() {
       </p>
 
       <section>
-        <h2>Quick start</h2>
-        <p>
-          <strong>Step 1.</strong> Create a catch endpoint. No auth required.
-          You get back an <code>ingestUrl</code> and an <code>eventsUrl</code>.
-        </p>
+      <h2>Quick start</h2>
+      <p>
+        <strong>Step 1.</strong> Create a catch endpoint. No auth required.
+        You get back an <code>ingestUrl</code> and an <code>eventsUrl</code>.
+      </p>
         <pre>{EXAMPLE_CREATE}</pre>
       </section>
 

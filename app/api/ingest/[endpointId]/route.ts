@@ -3,15 +3,13 @@ import { captureRequestAsEvent } from "@/lib/capture";
 import { getConfig } from "@/lib/config";
 import { jsonError } from "@/lib/http";
 import { getQueueClient, getTopicName } from "@/lib/queue";
-import { deriveWriteSecret } from "@/lib/security";
-import { isValidEndpointId, isValidWriteSecret } from "@/lib/validation";
+import { isValidEndpointId } from "@/lib/validation";
 
 export const runtime = "nodejs";
 
 type IngestRouteContext = {
   params: Promise<{
     endpointId: string;
-    writeSecret: string;
   }>;
 };
 
@@ -21,14 +19,9 @@ async function handleIngest(
 ): Promise<NextResponse> {
   try {
     const config = getConfig();
-    const { endpointId, writeSecret } = await context.params;
+    const { endpointId } = await context.params;
 
-    if (!isValidEndpointId(endpointId) || !isValidWriteSecret(writeSecret)) {
-      return jsonError(404, "Not Found");
-    }
-
-    const expectedSecret = deriveWriteSecret(endpointId, config.signingSecret);
-    if (writeSecret !== expectedSecret) {
+    if (!isValidEndpointId(endpointId)) {
       return jsonError(404, "Not Found");
     }
 
@@ -36,7 +29,7 @@ async function handleIngest(
       request,
       endpointId,
       config.maxCaptureBytes,
-      `/api/ingest/${endpointId}/[redacted]`,
+      `/api/ingest/${endpointId}`,
     );
 
     const queueClient = getQueueClient();

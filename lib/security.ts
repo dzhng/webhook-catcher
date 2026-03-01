@@ -22,13 +22,6 @@ function signPayload(encodedHeader: string, encodedPayload: string, secret: stri
     .digest("base64url");
 }
 
-export function deriveWriteSecret(endpointId: string, signingSecret: string): string {
-  return createHmac("sha256", signingSecret)
-    .update(`write:${endpointId}`)
-    .digest("base64url")
-    .slice(0, 40);
-}
-
 export function signToken(payload: GenericTokenPayload, secret: string): string {
   const encodedHeader = encode(JSON.stringify({ alg: "HS256", typ: "JWT" }));
   const encodedPayload = encode(JSON.stringify(payload));
