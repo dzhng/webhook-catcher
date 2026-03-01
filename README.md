@@ -57,11 +57,9 @@ curl -s -X POST http://localhost:3000/api/v1/endpoints \
 ```
 
 Response fields:
-- `endpointId`
-- `writeSecret`
-- `readToken`
 - `ingestUrl`
 - `eventsUrl`
+- `readToken`
 
 ### Ingest webhook
 

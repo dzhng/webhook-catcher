@@ -23,9 +23,8 @@ export default function Home() {
       <section>
         <h2>1) Create endpoint</h2>
         <p>
-          Returns <code>endpointId</code>, <code>writeSecret</code>,{" "}
-          <code>readToken</code>, <code>ingestUrl</code>, and{" "}
-          <code>eventsUrl</code>.
+          Returns only what you need right away: <code>ingestUrl</code>,{" "}
+          <code>eventsUrl</code>, and <code>readToken</code>.
         </p>
         <pre>{EXAMPLE_CREATE}</pre>
       </section>

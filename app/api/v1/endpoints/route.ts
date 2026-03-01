@@ -28,12 +28,9 @@ export async function POST(request: Request): Promise<NextResponse> {
 
     return NextResponse.json(
       {
-        endpointId,
-        writeSecret,
-        readToken,
         ingestUrl: buildAbsoluteUrl(request, ingestPath, config.baseUrl),
         eventsUrl: buildAbsoluteUrl(request, eventsPath, config.baseUrl),
-        readTokenTtlSeconds: config.readTokenTtlSeconds,
+        readToken,
       },
       {
         headers: {
