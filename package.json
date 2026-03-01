@@ -1,5 +1,5 @@
 {
-  "name": "webhook-catches",
+  "name": "webhook-collector",
   "version": "0.1.0",
   "private": true,
   "scripts": {

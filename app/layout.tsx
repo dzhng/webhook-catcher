@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Webhook Catches",
+  title: "Webhook Collector",
   description:
     "Catch, inspect, and debug webhooks. Create a temporary endpoint, point your service at it, read back everything that was sent.",
 };
