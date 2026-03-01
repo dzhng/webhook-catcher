@@ -83,7 +83,7 @@ const SKILL_BLOCK = `# Webhook Collector — Skill Definition
 export default function Home() {
   return (
     <main className="docs-root">
-      <h1>Webhook Collector</h1>
+      <h1>Let your AI agent catch data from webhooks</h1>
       <p>
         Catch, inspect, and debug webhooks. Create a temporary endpoint, point
         your service at it, read back everything that was sent.
