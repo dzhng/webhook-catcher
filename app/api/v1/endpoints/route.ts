@@ -40,17 +40,3 @@ export async function POST(request: Request): Promise<NextResponse> {
     return jsonError(500, "Could not create endpoint");
   }
 }
-
-export async function GET(): Promise<NextResponse> {
-  return NextResponse.json(
-    {
-      error: "Method Not Allowed",
-    },
-    {
-      status: 405,
-      headers: {
-        Allow: "POST",
-      },
-    },
-  );
-}
